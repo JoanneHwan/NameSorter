@@ -21,13 +21,26 @@ namespace NameSorter
         /// </summary>
         public static string[] ProcessNameList(string inputFilepath, string outputFilepath)
         {
-            // Read contents in input file
-            IEnumerable<string> presortNames = File.ReadLines(inputFilepath);
+            string[] sortedNames = new string[] { };
 
-            string[] sortedNames = SortNameList(presortNames);
+            // Only proceed if file exists
+            if (File.Exists(inputFilepath))
+            { 
+                // Read contents in input file
+                IEnumerable<string> presortNames = File.ReadLines(inputFilepath);
 
-            // Write contents to output file
-            File.WriteAllLinesAsync(outputFilepath, sortedNames);
+                 sortedNames = SortNameList(presortNames);
+
+                if (sortedNames.Length > 0)
+                {
+                    // Write contents to output file
+                    File.WriteAllLinesAsync(outputFilepath, sortedNames);
+                }
+            }
+            else
+            {
+                Console.WriteLine("File " + outputFilepath + " cannot be found.");
+            }
 
             return sortedNames;
 

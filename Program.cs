@@ -8,6 +8,8 @@ namespace NameSorter
     {
         static void Main(string[] args)
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+
             string inputFilepath = @"unsorted-names-list.txt";
             string outputFilepath = @"sorted-names-list.txt";
 
@@ -16,6 +18,11 @@ namespace NameSorter
 
             // Print each line of returned sorted name list
             Array.ForEach(sortedNames, Console.WriteLine);
+
+            watch.Stop();
+
+            // Print time taken to execute the logic
+            Console.WriteLine($"\r\nExecution Time: {watch.ElapsedMilliseconds} ms");
         }
 
     }
